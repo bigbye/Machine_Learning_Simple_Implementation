@@ -23,4 +23,4 @@ def train_test_split(x, y, test_ratio=0.2, seed=None):
     x_test = x[test_indexes]
     y_test = y[test_indexes]
 
-    return x_train, y_train, x_test, y_test
+    return x_train, x_test, y_train, y_test
