@@ -7,6 +7,7 @@ from metrics import *
 from PCA import *
 import datetime
 import matplotlib.pyplot as plt
+from LogisticRegression import *
 
 
 def test_KNN():
@@ -119,7 +120,29 @@ def test_PCA():
     # restore并不能复原原数据，只是再次在高维下表示已降到低维的数据。
 
 
+def test_Logistic_Regression():
+    iris = datasets.load_iris()
+    X = iris.data
+    y = iris.target
+    X = X[y < 2, :2]
+    y = y[y < 2]
+
+    plt.scatter(X[y == 0, 0], X[y == 0, 1], c='r')
+    plt.scatter(X[y == 1, 0], X[y == 1, 1], c='b')
+    plt.show()
+    X_train, X_test, y_train, y_test = train_test_split(X, y, seed=666)
+    log_reg = LogisticRegression()
+    log_reg.fit(X_train, y_train)
+    print(log_reg.score(X_test, y_test))
+
+    print(log_reg.predict_proba(X_test))
+    print(log_reg.predict(X_test))
+    print(y_test)
+
+
 # test_KNN()
 # test_Linear_Regression()
+# test_PCA()
+# test_Logistic_Regression()
 
-test_PCA()
+
